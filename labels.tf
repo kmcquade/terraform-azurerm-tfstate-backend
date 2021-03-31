@@ -40,3 +40,20 @@ module "storage_container_label" {
   tags         = var.default_tags
   enabled      = var.storage_account_name == "" ? true : false
 }
+
+# Key Vault
+# 3-24 characters
+# Alphanumerics and hyphens.
+# Start with letter. End with letter or digit. Can't contain consecutive hyphens.
+# https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftkeyvault
+module "key_vault_label" {
+  source       = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=0.4.0"
+  namespace    = var.namespace
+  stage        = var.stage
+  name         = var.name
+  attributes   = var.attributes
+  delimiter    = "-"
+  convert_case = true
+  tags         = var.default_tags
+  enabled      = var.storage_account_name == "" ? true : false
+}

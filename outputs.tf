@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------------------------------------------
-# Resource group attributes
+# Resource Group attributes
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group#attributes-reference
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ output "resource_group_name" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# Storage account attributes:
+# Storage Account attributes:
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account#attributes-reference
 # ---------------------------------------------------------------------------------------------------------------------
 output "storage_account_id" {
@@ -69,7 +69,7 @@ output "storage_account_secondary_blob_connection_string" {
 }
 */
 # ---------------------------------------------------------------------------------------------------------------------
-# Storage container attributes
+# Storage Container attributes
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container#attributes-reference
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -91,4 +91,52 @@ output "storage_container_has_legal_hold" {
 output "storage_container_resource_manager_id" {
   value       = azurerm_storage_container.tfstate.resource_manager_id
   description = "The Resource Manager ID of this Storage Container."
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Key Vault Attributes
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_key#attributes-reference
+# ---------------------------------------------------------------------------------------------------------------------
+### The Key Vault ###
+output "key_vault_id" {
+  value       = azurerm_key_vault.tfstate.id
+  description = ""
+}
+
+### the Key Vault Key ###
+output "key_vault_key_id" {
+  value       = azurerm_key_vault_key.tfstate.id
+  description = "The Key Vault Key ID"
+}
+
+output "key_vault_key_version" {
+  value       = azurerm_key_vault_key.tfstate.version
+  description = "The current version of the Key Vault Key."
+}
+
+/*
+output "key_vault_key_versionless_id" {
+  value       = azurerm_key_vault_key.tfstate.versionless_id
+  description = "The Base ID of the Key Vault Key"
+}
+*/
+
+
+output "z_instructions" {
+  value = <<INSTRUCTIONS
+If you just ran this for the first time, you are using local Terraform state. Let's move the local Terraform state into the storage account that we just created.
+
+Create a file called state.tf with the following contents:
+
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "${azurerm_resource_group.tfstate.name}
+    storage_account_name = "${azurerm_storage_account.tfstate.name}"
+    container_name       = "${azurerm_storage_container.tfstate.name}"
+    key                  = "statebucket/terraform.tfstate"
+    subscription_id      = "${data.azurerm_client_config.current.subscription_id}"
+    tenant_id            = "${data.azurerm_client_config.current.tenant_id}"
+  }
+}
+INSTRUCTIONS
 }
