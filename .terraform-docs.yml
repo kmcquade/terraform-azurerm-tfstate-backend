@@ -1,0 +1,37 @@
+formatter: markdown table
+header-from: main.tf
+footer-from: ""
+
+sections:
+  hide-all: false
+  hide: []
+  show-all: true
+  show: []
+
+output:
+  file: ""
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ""
+
+sort:
+  enabled: true
+  by:
+    - required
+    - type
+
+settings:
+  anchor: true
+  color: true
+  default: true
+  escape: true
+  indent: 2
+  required: true
+  sensitive: true
+  type: true

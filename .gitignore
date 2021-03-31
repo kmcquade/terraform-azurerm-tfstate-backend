@@ -55,7 +55,7 @@ coverage.xml
 *.tfstate
 *.tfstate.*
 *.tfvars
-!terraform.tfvars
+#!terraform.tfvars
 .vagrant
 packer_cache/
 *.box
@@ -63,3 +63,6 @@ packer_cache/
 #### Other
 *.log
 *.pem
+
+# Project specific
+terraform.tfvars
