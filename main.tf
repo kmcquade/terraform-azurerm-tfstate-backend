@@ -3,13 +3,7 @@
 # azurerm_storage_account: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
 # azurerm_storage_container: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container
 */
-locals {
-  resource_group_name  = var.resource_group_name == "" ? module.resource_group_label.id : var.resource_group_name
-  storage_account_name = var.storage_account_name == "" ? module.storage_account_label.id : var.storage_account_name
 
-  # Format names
-
-}
 resource "azurerm_resource_group" "tfstate" {
   name     = var.resource_group_name == "" ? module.resource_group_label.id : var.resource_group_name
   location = var.location
