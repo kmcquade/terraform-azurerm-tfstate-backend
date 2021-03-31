@@ -66,3 +66,4 @@ packer_cache/
 
 # Project specific
 terraform.tfvars
+state.tf
