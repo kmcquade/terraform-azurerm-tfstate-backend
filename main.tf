@@ -1,6 +1,7 @@
 /*
 # azurerm_resource_group: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group
 # azurerm_storage_account: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account
+# azurerm_storage_container: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container
 */
 locals {
   resource_group_name  = var.resource_group_name == "" ? module.resource_group_label.id : var.resource_group_name
@@ -14,7 +15,6 @@ resource "azurerm_resource_group" "tfstate" {
   location = var.location
 }
 
-#checkov:skip=CKV_AZURE_35:Not running from a VNet
 resource "azurerm_storage_account" "tfstate" {
   name                     = var.storage_account_name == "" ? module.storage_account_label.id : var.storage_account_name
   resource_group_name      = azurerm_resource_group.tfstate.name
@@ -35,4 +35,10 @@ resource "azurerm_storage_account" "tfstate" {
   tags = {
     environment = "staging"
   }
+}
+
+resource "azurerm_storage_container" "tfstate" {
+  name                  = module.storage_container_label.id
+  storage_account_name  = azurerm_storage_account.tfstate.name
+  container_access_type = "private"
 }
