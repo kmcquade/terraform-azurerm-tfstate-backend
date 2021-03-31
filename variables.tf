@@ -48,6 +48,12 @@ variable "key_vault_sku_name" {
   description = "The Name of the SKU used for this Key Vault. Possible values are standard and premium."
 }
 
+variable "key_vault_key_expiration_date" {
+  type        = string
+  default     = "2022-12-30T20:00:00Z"
+  description = "Expiration of the Key Vault Key, in UTC datetime (Y-m-d'T'H:M:S'Z')."
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # RESOURCE REFERENCES
 # These variables pass in metadata on other AWS resources, such as ARNs, Names, etc.
