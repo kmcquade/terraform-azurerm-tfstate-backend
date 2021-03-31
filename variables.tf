@@ -50,14 +50,17 @@ variable "resource_group_name" {
 # ---------------------------------------------------------------------------------------------------------------------
 variable "namespace" {
   description = "Namespace, which could be your organization name. First item in naming sequence."
+  type        = string
 }
 
 variable "stage" {
   description = "Stage, e.g. `prod`, `staging`, `dev`, or `test`. Second item in naming sequence."
+  type        = string
 }
 
 variable "name" {
   description = "Name, which could be the name of your solution or app. Third item in naming sequence."
+  type        = string
 }
 
 variable "attributes" {

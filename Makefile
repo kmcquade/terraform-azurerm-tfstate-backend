@@ -5,7 +5,7 @@ SHELL:=/bin/bash
 # ---------------------------------------------------------------------------------------------------------------------
 # Auto generate docs
 docs:
-	@terraform-docs markdown table --sort-by-required . > README.md
+	terraform-docs -c .tfdocs-config.yml ./
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Security scans

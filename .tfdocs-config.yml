@@ -4,12 +4,12 @@ footer-from: ""
 
 sections:
   hide-all: false
-  hide: []
+  hide: ["requirements", "modules"]
   show-all: true
   show: []
 
 output:
-  file: ""
+  file: "tmp.md"
   mode: inject
   template: |-
     <!-- BEGIN_TF_DOCS -->
@@ -24,7 +24,7 @@ sort:
   enabled: true
   by:
     - required
-    - type
+#    - type
 
 settings:
   anchor: true
