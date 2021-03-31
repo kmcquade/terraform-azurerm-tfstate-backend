@@ -3,9 +3,9 @@ SHELL:=/bin/bash
 # ---------------------------------------------------------------------------------------------------------------------
 # Miscellaneous
 # ---------------------------------------------------------------------------------------------------------------------
-# Auto generate docs
-docs:
-	terraform-docs -c .tfdocs-config.yml ./
+## Auto generate docs
+#docs:
+#	terraform-docs -c .tfdocs-config.yml ./
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Security scans
@@ -16,7 +16,7 @@ tfsec:
 
 # Security scans with Checkov
 checkov:
-	@checkov -d ./
+	@checkov -d ./ --skip-check CKV_AZURE_35,CKV_AZURE_43
 
 security: tfsec checkov
 
